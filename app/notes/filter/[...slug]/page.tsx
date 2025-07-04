@@ -5,6 +5,35 @@ type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const tag = slug[0] === "all" ? undefined : slug[0];
+  const { notes } = await fetchNotes({ page: 1, tag });
+
+  const topNoteTitle = notes[0]?.tag || "All Notes";
+
+  return {
+    title: `(${topNoteTitle}) - NoteHub`,
+    description: `Notes with tag - ${topNoteTitle}`,
+    openGraph: {
+      title: `NoteHub`,
+      description: `Page with notes tagged ${topNoteTitle ?? "all"}`,
+      url: `https://notehub.vercel.app/notes/filter/${topNoteTitle}`,
+      siteName: "NoteHub",
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: "NoteHub App image",
+        },
+      ],
+      locale: "en-US",
+      type: "website",
+    },
+  };
+}
+
 const NotesPage = async ({ params }: Props) => {
   const { slug } = await params;
   const tag = slug[0] === "all" ? undefined : slug[0];
