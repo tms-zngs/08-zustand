@@ -1,0 +1,17 @@
+.emptyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: #f0f8ff;
+  border: 1px solid #e0efff;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+.emptyText {
+  color: #336699;
+  text-align: center;
+  font-style: italic;
+}
