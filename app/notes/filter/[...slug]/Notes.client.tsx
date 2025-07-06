@@ -13,8 +13,7 @@ import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import EmptyState from "@/components/EmptyState/EmptyState";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
+import Link from "next/link";
 
 interface NotesClientProps {
   initialNotes: Note[];
@@ -29,13 +28,9 @@ export default function NotesClient({
   initialTag,
 }: NotesClientProps) {
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearchQuery] = useDebounce(searchQuery, 300);
   const tag = initialTag;
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -73,9 +68,9 @@ export default function NotesClient({
             onPageChange={setCurrentPage}
           />
         )}
-        <button className={css.button} onClick={openModal}>
+        <Link className={css.button} href="/notes/action/create">
           Create note +
-        </button>
+        </Link>
       </header>
       <div>
         <Toaster position="top-center" reverseOrder={true} />
@@ -102,11 +97,6 @@ export default function NotesClient({
         />
       )}
       {!isPending && !isError && notes.length > 0 && <NoteList notes={notes} />}
-      {isModalOpen && (
-        <Modal onClose={closeModal}>
-          <NoteForm onClose={closeModal} />
-        </Modal>
-      )}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Note, NoteFormValues } from "../types/note";
+import type { Note, NoteFormValues, TagName } from "../types/note";
 
 type FetchNotesParams = {
   page: number;
