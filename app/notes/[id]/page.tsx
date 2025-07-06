@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props) {
   const noteTitle = note.title || "Note Details";
   const noteDescription =
     note.content?.slice(0, 160) || "Detailed note description.";
-  const noteUrl = `https://notehub.vercel.app/notes/${id}`;
+  const noteUrl = `https://08-zustand-alpha.vercel.app/notes/${id}`;
   const noteImageUrl =
     "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg";
 
