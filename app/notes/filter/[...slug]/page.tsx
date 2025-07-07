@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import NotesClient from "./Notes.client";
 import { fetchNotes } from "@/lib/api";
 
@@ -5,7 +6,7 @@ type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tag = slug[0] === "all" ? undefined : slug[0];
   const { notes } = await fetchNotes({ page: 1, tag });

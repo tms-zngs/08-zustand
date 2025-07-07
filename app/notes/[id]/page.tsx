@@ -5,11 +5,12 @@ import {
   HydrationBoundary,
   dehydrate,
 } from "@tanstack/react-query";
+import { Metadata } from "next";
 type Props = {
   params: Promise<{ id: string }>;
 };
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const id = Number(resolvedParams.id);
   const note = await fetchNoteById(id);

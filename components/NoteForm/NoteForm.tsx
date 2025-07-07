@@ -67,7 +67,7 @@ export default function NoteForm() {
 
       <div className={css.formGroup}>
         <label htmlFor="content">Content</label>
-        <input
+        <textarea
           id="content"
           name="content"
           defaultValue={draft?.content}
